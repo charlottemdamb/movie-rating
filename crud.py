@@ -26,6 +26,9 @@ def get_movies():
 def get_movie_by_id(movie_id):
     return Movie.query.get(movie_id)
 
+def get_movie_by_title(title):
+    return Movie.query.filter(Movie.title == title).first()
+
 def get_users():
     """Return all movies."""
     return User.query.all()

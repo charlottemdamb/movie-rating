@@ -34,11 +34,13 @@ def dashboard():
 def rate_movie():
     """Dashboard.html"""
     user = crud.get_user_by_email(session['email'])
-    movie = request.form.get('movie')
+    movie = crud.get_movie_by_title(request.form.get('movie'))
+    print(f"######### Movie: {movie}")
     score = request.form.get('score')
-    new_rating = crud.create_rating(movie=movie, user=user, score=score)
+    new_rating = crud.create_rating(movie=movie, user=user, score=int(score)) 
     db.session.add(new_rating)
     db.session.commit()
+    print(f'########## {new_rating.movie}')
     flash("Rating successfully added")
 
     return redirect("/dashboard")

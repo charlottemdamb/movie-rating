@@ -14,7 +14,7 @@
     <label for="movie_rating">Choose the Movie:</label>
     <select name="movie" id="movie-choice">
         {% for movie in movies %}
-      <option value={{movie.title}}>{{movie.title}}</option>
+      <option value="{{movie.title}}">{{movie.title}}</option>
         {% endfor %}
     </select>
 

@@ -8,6 +8,10 @@
 <p>
   {{ movie.overview }}
 </p>
-
+<ul>
+  {% for rating in movie.ratings %}
+    <li>{{ rating.score }}/10 Review left by: {{ rating.user.email }}</li>
+  {% endfor %}
+</ul>
 <img src="{{ movie.poster_path }}">
 {% endblock %}
