@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+{% block title %}Movie Ratings Home{% endblock %}
+
+{% block body %}
+  <h1>Welcome!</h1>
+
+  <h2>Navigation</h2>
+  <ul>
+    <li><a href="/movies">View all movies</a></li>
+    <li><a href="/users">View all users</a></li>
+  </ul>
+  <h2>Add a Rating</h2>
+  <form action="/rating" method="POST">
+    <label for="movie_rating">Choose the Movie:</label>
+    <select name="movie" id="movie-choice">
+        {% for movie in movies %}
+      <option value={{movie.title}}>{{movie.title}}</option>
+        {% endfor %}
+    </select>
+
+    <label for="score">What's the score?:</label>
+    <select name="score" id="score-select">
+        {%for i in range(0,11)%}
+      <option value={{i}}>{{i}}</option>
+        {% endfor %}
+    </select> 
+    <input type="submit"> 
+    
+  </form>
+{% endblock %}

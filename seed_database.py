@@ -17,6 +17,23 @@ with open('data/movies.json') as f:
 movies_in_db = []
 for movie in movie_data:
     release_date = datetime.strptime(movie['release_date'], "%Y-%m-%d")
-    movies_in_db.append(crud.create_movie(movie['title'], movie['overview'], release_date, movie['poster_path']))
-model.db.session.add(movies_in_db)
+    db_movie = crud.create_movie(movie['title'], movie['overview'], release_date, movie['poster_path'])
+    movies_in_db.append(db_movie)
+model.db.session.add_all(movies_in_db)
+model.db.session.commit()
+
+for n in range(10):
+    email = f"user{n}@test.com"  # Voila! A unique email!
+    password = "test"
+
+    user = crud.create_user(email, password)
+    model.db.session.add(user)
+
+    for _ in range(10):
+        random_movie = choice(movies_in_db)
+        score = randint(1, 5)
+
+        rating = crud.create_rating(user, random_movie, score)
+        model.db.session.add(rating)
+
 model.db.session.commit()
